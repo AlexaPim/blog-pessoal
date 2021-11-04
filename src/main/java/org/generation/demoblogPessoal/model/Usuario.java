@@ -34,7 +34,7 @@ public class Usuario {
 	message = "O atributo nome deve ter no mínimo 05 e no máximo 100 caracteres")
 	private String nome;
 	
-	@ApiModelProperty
+	@ApiModelProperty(example = "email@email.com.br")
 	@NotNull(message = "O atributo usuário é obrigatório")
 	@NotBlank(message = "O atributo usuário não pode ser vazio")
 	@Email(message = "O atributo usuário deve ser um email")
@@ -43,6 +43,10 @@ public class Usuario {
 	@NotNull(message = "O atributo senha é obrigatório")
 	@Size(min = 8, message = "O atributo senha deve ter no mínimo 8 caracteres")
 	private String senha;
+	
+	private String foto;
+	
+	private String tipo;
 
 	
 	@OneToMany (mappedBy = "usuario", cascade = CascadeType.REMOVE)
@@ -98,6 +102,19 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+		
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	public List<Postagem> getPostagem() {
 		return postagem;
