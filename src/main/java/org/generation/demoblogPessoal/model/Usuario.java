@@ -24,53 +24,50 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull(message = "O atributo nome é obrigatório")
-	@Size(min = 5, max = 100,
-	message = "O atributo nome deve ter no mínimo 05 e no máximo 100 caracteres")
+	@Size(min = 5, max = 100, message = "O atributo nome deve ter no mínimo 05 e no máximo 100 caracteres")
 	private String nome;
-	
-	@ApiModelProperty(example = "email@email.com.br")
+
+	@ApiModelProperty(example = "email@email.com")
 	@NotNull(message = "O atributo usuário é obrigatório")
 	@NotBlank(message = "O atributo usuário não pode ser vazio")
 	@Email(message = "O atributo usuário deve ser um email")
 	private String usuario;
-	
+
 	@NotNull(message = "O atributo senha é obrigatório")
 	@Size(min = 8, message = "O atributo senha deve ter no mínimo 8 caracteres")
 	private String senha;
-	
+
 	private String foto;
-	
+
 	private String tipo;
 
-	
-	@OneToMany (mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
-	private List <Postagem> postagem;
-	
+	private List<Postagem> postagem;
+
 	@Column(name = "dt_nascimento")
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
 
-	
-	
 	// Primeiro método Construtor - Com os atributos
-	
-	public Usuario(long id, String nome, String usuario, String senha,
-	LocalDate dataNascimento) {
-	this.id = id;
-	this.nome = nome;
-	this.usuario = usuario;
-	this.senha = senha;
-	this.dataNascimento = dataNascimento;
+
+	public Usuario(long id, String nome, String usuario, String senha, LocalDate dataNascimento) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.dataNascimento = dataNascimento;
 	}
+
 	// Segundo método Construtor - Sem os atributos
-	public Usuario() { }
+	public Usuario() {
+	}
 
 	public long getId() {
 		return id;
@@ -103,34 +100,43 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-		
+
 	public String getFoto() {
 		return foto;
 	}
+
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
 	public String getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
 	public List<Postagem> getPostagem() {
 		return postagem;
 	}
+
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
+
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
+
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", usuario=" + usuario + ", senha=" + senha + ", foto=" + foto
+				+ ", tipo=" + tipo + ", postagem=" + postagem + ", dataNascimento=" + dataNascimento + "]";
+	}
 
 }
